@@ -1,7 +1,5 @@
 package com.algaworks.algafood.jpa;
 
-import java.util.List;
-
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
@@ -12,7 +10,7 @@ import com.algaworks.algafood.domain.repository.CozinhaRepository;
 /*
  * Classe para testar chamadas ao banco
  */
-public class ConsultaCozinhaMain {
+public class AlteraçãoCozinhaMain {
 	
 	public static void main(String[] args) {
 		
@@ -21,13 +19,17 @@ public class ConsultaCozinhaMain {
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+		CozinhaRepository cozinhaRepository= applicationContext.getBean(CozinhaRepository.class);
+
+		Cozinha c1 = new Cozinha();
+		c1.setId(1L);
+		c1.setNome("Brasileira");
+	
+		c1 = cozinhaRepository.salvar(c1);
 		
-		List<Cozinha> cozinhas = cozinhaRepository.listar();
+		Cozinha c2 = cozinhaRepository.buscar(1L);
+		System.out.printf("%d - %s\n", c2.getId(), c2.getNome());
 		
-		for(Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-		}
 	}
 
 }

@@ -12,7 +12,7 @@ import com.algaworks.algafood.domain.repository.CozinhaRepository;
 /*
  * Classe para testar chamadas ao banco
  */
-public class ConsultaCozinhaMain {
+public class ExclusaoCozinhaMain {
 	
 	public static void main(String[] args) {
 		
@@ -22,12 +22,15 @@ public class ConsultaCozinhaMain {
 				.run(args);
 		
 		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+
+		Cozinha c1 = new Cozinha();
+		c1.setId(1L);
 		
-		List<Cozinha> cozinhas = cozinhaRepository.listar();
+		cozinhaRepository.remover(c1);
 		
-		for(Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-		}
+		Cozinha c2 = cozinhaRepository.buscar(1L);
+		System.out.printf("%d - %s\n", c2.getId(), c2.getNome());
+		
 	}
 
 }

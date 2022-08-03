@@ -7,12 +7,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
 import com.algaworks.algafood.AlgafoodApiApplication;
-import com.algaworks.algafood.domain.model.Cozinha;
-import com.algaworks.algafood.domain.repository.CozinhaRepository;
+import com.algaworks.algafood.domain.model.Restaurante;
+import com.algaworks.algafood.domain.repository.RestauranteRepository;
 /*
  * Classe para testar chamadas ao banco
  */
-public class ConsultaCozinhaMain {
+public class ConsultaRestauranteMain {
 	
 	public static void main(String[] args) {
 		
@@ -21,12 +21,13 @@ public class ConsultaCozinhaMain {
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+		RestauranteRepository restauranteRepository = applicationContext.getBean(RestauranteRepository.class);
 		
-		List<Cozinha> cozinhas = cozinhaRepository.listar();
+		List<Restaurante> restaurantes = restauranteRepository.listar();
 		
-		for(Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
+		for(Restaurante restaurante : restaurantes) {
+			System.out.printf("%s - %, .2f - %s\n", restaurante.getNome(), 
+					restaurante.getTaxaFrete(), restaurante.getCozinha().getNome());
 		}
 	}
 

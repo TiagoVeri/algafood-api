@@ -12,7 +12,7 @@ import com.algaworks.algafood.domain.repository.CozinhaRepository;
 /*
  * Classe para testar chamadas ao banco
  */
-public class ConsultaCozinhaMain {
+public class BuscaCozinhaMain {
 	
 	public static void main(String[] args) {
 		
@@ -21,13 +21,12 @@ public class ConsultaCozinhaMain {
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+		CozinhaRepository cozinhaRepository= applicationContext.getBean(CozinhaRepository.class);
 		
-		List<Cozinha> cozinhas = cozinhaRepository.listar();
+		Cozinha cozinha =  cozinhaRepository.buscar(1L);
 		
-		for(Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-		}
+		System.out.printf("%d - %s", cozinha.getId(), cozinha.getNome());
+
 	}
 
 }
